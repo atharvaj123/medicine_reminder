@@ -137,13 +137,17 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+    "Patient": {
+        "on_update": "medicine_reminder.api.hooks.create_medicine_events",
+        "after_insert": "medicine_reminder.api.hooks.create_medicine_events"
+    },
+    "Medicine": {
+        "before_save": "medicine_reminder.api.hooks.create_medicine_events",
+        "after_insert": "medicine_reminder.api.hooks.create_medicine_events",
+        "on_update": "medicine_reminder.api.hooks.create_medicine_events",
+    }
+}
 
 # Scheduled Tasks
 # ---------------
